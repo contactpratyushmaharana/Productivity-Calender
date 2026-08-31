@@ -5,7 +5,7 @@ html_content = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>August 2026 Wall Calendar - A3</title>
+    <title>September 2026 Wall Calendar - A3</title>
     <style>
         @page {
             size: A3 landscape; /* 420mm x 297mm */
@@ -242,10 +242,10 @@ html_content = """<!DOCTYPE html>
     <table class="header-table">
         <tr>
             <td style="width: 35%; vertical-align: middle;">
-                <div class="header-title">August 2026</div>
+                <div class="header-title">September 2026</div>
             </td>
             <td style="width: 65%; text-align: right; vertical-align: middle;">
-                <div class="top-quote">"You do not rise to the level of your goals. You fall to the level of your systems."</div>
+                <div class="top-quote">"Every action you take is a vote for the type of person you wish to become."</div>
             </td>
         </tr>
     </table>
@@ -379,17 +379,15 @@ habit_icons_html = """
 
 calendar_rows = [
     # Row 1
-    [("26", True), ("27", True), ("28", True), ("29", True), ("30", True), ("31", True), ("1", False)],
+    [("30", True), ("31", True), ("1", False), ("2", False), ("3", False), ("4", False), ("5", False)],
     # Row 2
-    [("2", False), ("3", False), ("4", False), ("5", False), ("6", False), ("7", False), ("8", False)],
+    [("6", False), ("7", False), ("8", False), ("9", False), ("10", False), ("11", False), ("12", False)],
     # Row 3
-    [("9", False), ("10", False), ("11", False), ("12", False), ("13", False), ("14", False), ("15", False)],
+    [("13", False), ("14", False), ("15", False), ("16", False), ("17", False), ("18", False), ("19", False)],
     # Row 4
-    [("16", False), ("17", False), ("18", False), ("19", False), ("20", False), ("21", False), ("22", False)],
+    [("20", False), ("21", False), ("22", False), ("23", False), ("24", False), ("25", False), ("26", False)],
     # Row 5
-    [("23", False), ("24", False), ("25", False), ("26", False), ("27", False), ("28", False), ("29", False)],
-    # Row 6
-    [("30", False), ("31", False), ("1", True), ("2", True), ("3", True), ("4", True), ("5", True)],
+    [("27", False), ("28", False), ("29", False), ("30", False), ("1", True), ("2", True), ("3", True)],
 ]
 
 for row in calendar_rows:
@@ -412,8 +410,8 @@ html_content += """                    </tbody>
 </html>
 """
 
-html_path = 'august_2026_calendar_a3_v3.html'
-pdf_path = 'August_2026_Wall_Calendar_A3-v3.pdf'
+html_path = 'september_2026_calendar_a3_v3.html'
+pdf_path = 'September_2026_Wall_Calendar_A3-v3.pdf'
 
 with open(html_path, 'w', encoding='utf-8') as f:
     f.write(html_content)
