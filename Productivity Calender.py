@@ -224,12 +224,12 @@ page_template = """<!DOCTYPE html>
 
         .habit-symbol {
             display: inline-block;
-            margin-right: 4px;
+            margin-right: 3px;
         }
 
         .habit-symbol svg {
-            width: 15px;
-            height: 15px;
+            width: 12px;
+            height: 12px;
         }
     </style>
 </head>
@@ -256,6 +256,7 @@ page_template = """<!DOCTYPE html>
     <!-- Read: Open Book -->
     <!-- Hair Care: Comb / Scissors -->
     <!-- Vitamins: Pill -->
+    <!-- Sleep: Pillow with zzz -->
 
     <!-- Layout -->
     <table class="main-layout">
@@ -314,7 +315,14 @@ page_template = """<!DOCTYPE html>
                             </div>
                             <div class="key-label-cell">Take Vitamins</div>
                         </div>
-                    </div>
+                        <div class="key-item">
+                            <div class="key-icon-cell">
+                                <svg class="tracker-svg" viewBox="0 0 24 24" fill="none" stroke="#92400e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1.5 10.5c4-1.8 11-1.8 15 0-1.2 3-1.2 6 0 9-4 1.8-11 1.8-15 0 1.2-3 1.2-6 0-9z" /><path d="M12 2.5h4l-4 4.5h4" /><path d="M17.5 7h4.5l-4.5 5h4.5" />
+                                </svg>
+                            </div>
+                            <div class="key-label-cell">Sleep Schedule</div>
+                        </div>                    </div>
                 </div>
 
                 <div class="sidebar-card">
@@ -390,7 +398,11 @@ habit_icons_html = """
                 <path d="m8.5 8.5 7 7" />
             </svg>
         </span>
-    </div>
+        <span class="habit-symbol" title="Sleep Schedule">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1.5 10.5c4-1.8 11-1.8 15 0-1.2 3-1.2 6 0 9-4 1.8-11 1.8-15 0 1.2-3 1.2-6 0-9z" /><path d="M12 2.5h4l-4 4.5h4" /><path d="M17.5 7h4.5l-4.5 5h4.5" />
+            </svg>
+        </span>    </div>
 """
 
 def build(year, month):
