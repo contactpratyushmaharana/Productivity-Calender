@@ -1,7 +1,7 @@
-import os
+import calendar
 from weasyprint import HTML
 
-html_content = """<!DOCTYPE html>
+page_template = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -255,6 +255,7 @@ html_content = """<!DOCTYPE html>
     <!-- Water: Water Drop -->
     <!-- Read: Open Book -->
     <!-- Hair Care: Comb / Scissors -->
+    <!-- Vitamins: Pill -->
 
     <!-- Layout -->
     <table class="main-layout">
@@ -303,6 +304,15 @@ html_content = """<!DOCTYPE html>
                                 </svg>
                             </div>
                             <div class="key-label-cell">Hair Care</div>
+                        </div>
+                        <div class="key-item">
+                            <div class="key-icon-cell">
+                                <svg class="tracker-svg" viewBox="0 0 24 24" fill="none" stroke="#92400e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M10.5 20.5a4.95 4.95 0 0 1-7-7l10-10a4.95 4.95 0 0 1 7 7z" />
+                                    <path d="m8.5 8.5 7 7" />
+                                </svg>
+                            </div>
+                            <div class="key-label-cell">Take Vitamins</div>
                         </div>
                     </div>
                 </div>
@@ -374,32 +384,28 @@ habit_icons_html = """
                 <path d="M12 9.5a1.5 1.5 0 0 1 3 0" />
             </svg>
         </span>
+        <span class="habit-symbol" title="Take Vitamins">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.5 20.5a4.95 4.95 0 0 1-7-7l10-10a4.95 4.95 0 0 1 7 7z" />
+                <path d="m8.5 8.5 7 7" />
+            </svg>
+        </span>
     </div>
 """
 
-calendar_rows = [
-    # Row 1
-    [("30", True), ("31", True), ("1", False), ("2", False), ("3", False), ("4", False), ("5", False)],
-    # Row 2
-    [("6", False), ("7", False), ("8", False), ("9", False), ("10", False), ("11", False), ("12", False)],
-    # Row 3
-    [("13", False), ("14", False), ("15", False), ("16", False), ("17", False), ("18", False), ("19", False)],
-    # Row 4
-    [("20", False), ("21", False), ("22", False), ("23", False), ("24", False), ("25", False), ("26", False)],
-    # Row 5
-    [("27", False), ("28", False), ("29", False), ("30", False), ("1", True), ("2", True), ("3", True)],
-]
+def build(year, month):
+    label = f"{calendar.month_name[month]} {year}"
+    html_content = page_template.replace("September 2026", label)
+    for week in calendar.Calendar(firstweekday=6).monthdatescalendar(year, month):
+        html_content += "                        <tr>\n"
+        for d in week:
+            if d.month != month:
+                html_content += f'                            <td class="other-month"><div class="day-num muted">{d.day}</div></td>\n'
+            else:
+                html_content += f'                            <td><div class="day-num">{d.day}</div>{habit_icons_html}</td>\n'
+        html_content += "                        </tr>\n"
 
-for row in calendar_rows:
-    html_content += "                        <tr>\n"
-    for day_str, is_other in row:
-        if is_other:
-            html_content += f'                            <td class="other-month"><div class="day-num muted">{day_str}</div></td>\n'
-        else:
-            html_content += f'                            <td><div class="day-num">{day_str}</div>{habit_icons_html}</td>\n'
-    html_content += "                        </tr>\n"
-
-html_content += """                    </tbody>
+    html_content += """                    </tbody>
                 </table>
             </td>
         </tr>
@@ -410,11 +416,14 @@ html_content += """                    </tbody>
 </html>
 """
 
-html_path = 'september_2026_calendar_a3_v3.html'
-pdf_path = 'September_2026_Wall_Calendar_A3-v3.pdf'
+    stem = f"{calendar.month_name[month].lower()}_{year}"
+    html_path = f"{stem}_calendar_a3_v3.html"
+    pdf_path = f"{calendar.month_name[month]}_{year}_Wall_Calendar_A3-v3.pdf"
+    with open(html_path, 'w', encoding='utf-8') as f:
+        f.write(html_content)
+    HTML(html_path).write_pdf(pdf_path)
+    print(f"A3 PDF v3 generated: {pdf_path}")
 
-with open(html_path, 'w', encoding='utf-8') as f:
-    f.write(html_content)
 
-HTML(html_path).write_pdf(pdf_path)
-print(f"A3 PDF v3 generated: {pdf_path}")
+for month in (9, 10):
+    build(2026, month)
